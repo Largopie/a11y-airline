@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import close from '../assets/close.svg';
 
 import styles from './PromotionModal.module.css';
+import { createPortal } from 'react-dom';
 
 const PromotionModal = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -52,7 +53,7 @@ const PromotionModal = () => {
     return null;
   }
 
-  return (
+  return createPortal(
     <div onKeyDown={handleESCKeyDown} ref={modal} role="dialog" className={styles.modal}>
       <div className={styles.modalBackdrop} onClick={closeModal}></div>
       <div className={styles.modalContainer}>
@@ -80,7 +81,8 @@ const PromotionModal = () => {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
